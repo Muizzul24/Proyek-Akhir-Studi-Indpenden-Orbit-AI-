@@ -10,7 +10,7 @@ def connect_to_database():
         conn = mysql.connector.connect(
             host="localhost",  # Ganti dengan host server Anda
             user="root",       # Username MySQL
-            password="password_anda",  # Ganti dengan password MySQL Anda
+            password="",  # Ganti dengan password MySQL Anda
             database="facebase"        # Nama database yang baru saja dibuat
         )
         return conn
