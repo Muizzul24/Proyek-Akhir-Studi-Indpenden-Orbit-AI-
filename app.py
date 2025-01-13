@@ -1,9 +1,14 @@
 import streamlit as st
 import cv2
 import numpy as np
+from dotenv import load_dotenv  # Tambahkan untuk mengelola variabel lingkungan
+import os
 from HOG import compute_hog_features  # Mengimpor fungsi HOG dari HOG.py
 from FaceBase import verify_user, register_new_user  # Mengimpor fungsi dari FaceBase.py
 from home import show_home  # Mengimpor fungsi dari home.py
+
+# Memuat variabel lingkungan dari file .env
+load_dotenv()
 
 # CSS untuk mengatur gambar kiri dan kanan dengan Flexbox
 st.markdown(
