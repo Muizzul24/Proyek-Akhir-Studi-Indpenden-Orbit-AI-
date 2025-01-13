@@ -2,6 +2,7 @@
 streamlit-option-menu
 pandas
 mysql-connector-python
+opencv-python
 opencv-python-headless
 numpy 
 setuptools
