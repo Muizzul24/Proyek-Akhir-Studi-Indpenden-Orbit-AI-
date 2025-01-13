@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 import numpy as np
+import cv2
 
 def connect_to_database():
     return mysql.connector.connect(
