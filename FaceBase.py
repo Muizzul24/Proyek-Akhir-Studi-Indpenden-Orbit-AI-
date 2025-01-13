@@ -6,12 +6,21 @@ import numpy as np
 import cv2
 
 def connect_to_database():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="facebase"
-    )
+    try:
+        conn = mysql.connector.connect(
+            host="100.110.248.65",  # Hostname atau IP server MySQL
+            port=3306,                           # Port MySQL
+            user="root",                         # Username MySQL
+            password="04207027",                 # Password MySQL
+            database="facebase",   
+            ssl_disabled=False              # Nama database MySQL
+        )
+        if conn.is_connected():
+            st.success("Berhasil terhubung ke database!")
+            return conn
+    except Error as err:
+        st.error(f"Kesalahan koneksi database: {err}")
+        return None
 
 def register_new_user(user_id, name, age, address, college, hog_features):
     conn = connect_to_database()
