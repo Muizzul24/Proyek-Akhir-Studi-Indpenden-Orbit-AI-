@@ -20,16 +20,27 @@ def connect_to_database():
 
 def register_new_user(user_id, name, age, address, college, hog_features):
     conn = connect_to_database()
-    cursor = conn.cursor()
     
-    # Pastikan hanya menyimpan hog_features
-    cursor.execute("INSERT INTO user (id, nama, umur, alamat, kuliah, hog_features) VALUES (%s, %s, %s, %s, %s, %s)",
-                   (user_id, name, age, address, college, hog_features.tobytes()))  # Simpan sebagai bytes
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return "Registrasi berhasil!"
-
+    if not conn:
+        return "Koneksi ke database gagal. Mohon periksa konfigurasi database Anda."
+    
+    try:
+        cursor = conn.cursor()
+        
+        # Query untuk menyimpan data
+        cursor.execute(
+            "INSERT INTO users (id, nama, umur, alamat, kuliah, hog_features) VALUES (%s, %s, %s, %s, %s, %s)",
+            (user_id, name, age, address, college, hog_features.tobytes())  # Simpan fitur HOG sebagai bytes
+        )
+        
+        conn.commit()  # Simpan perubahan ke database
+        return "Registrasi berhasil!"
+    except Exception as e:
+        return f"Error saat menyimpan data: {e}"
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
 def verify_user(hog_features):
     conn = connect_to_database()
     cursor = conn.cursor()
